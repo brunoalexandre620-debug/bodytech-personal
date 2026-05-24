@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solicitar Personal Trainer – Bodytech</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0d0d1a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: #ffffff;
+      border-radius: 16px;
+      max-width: 580px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 32px 30px;
+      text-align: center;
+      position: relative;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #e63946, #ff6b35, #e63946);
+    }
+    .header h1 { color: #ffffff; font-size: 22px; font-weight: 700; margin-top: 10px; }
+    .header p { color: #a0a8c0; font-size: 14px; margin-top: 6px; }
+    .logo-icon { font-size: 36px; display: block; }
+    .form-body { padding: 30px; }
+    .section-title {
+      font-size: 13px; font-weight: 700; color: #e63946;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin: 24px 0 14px 0; padding-bottom: 6px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .section-title:first-child { margin-top: 0; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], input[type="tel"], select {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid #e0e0e0; border-radius: 8px;
+      font-size: 14px; color: #333; background: #fafafa;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    input:focus, select:focus {
+      outline: none; border-color: #e63946;
+      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1); background: #fff;
+    }
+    .select-wrapper { position: relative; }
+    .select-wrapper::after {
+      content: '▼'; font-size: 10px; color: #999;
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%); pointer-events: none;
+    }
+    .dias-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .dia-item { display: none; }
+    .dia-label {
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 6px; border: 1.5px solid #e0e0e0; border-radius: 8px;
+      cursor: pointer; font-size: 12px; font-weight: 600; color: #666;
+      background: #fafafa; transition: all 0.2s; text-align: center; user-select: none;
+    }
+    .dia-item:checked + .dia-label { background: #e63946; border-color: #e63946; color: #fff; }
+    .dia-label:hover { border-color: #e63946; color: #e63946; }
+    .submit-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #e63946, #c1121f);
+      color: white; border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      margin-top: 26px; transition: transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(230,57,70,0.4); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .success-screen { display: none; padding: 50px 30px; text-align: center; }
+    .success-icon { font-size: 64px; margin-bottom: 16px; }
+    .success-screen h2 { font-size: 22px; color: #1a1a2e; margin-bottom: 10px; }
+    .success-screen p { font-size: 15px; color: #666; line-height: 1.6; }
+    .error-msg {
+      background: #fff0f0; border: 1px solid #ffcccc; color: #c1121f;
+      padding: 10px 14px; border-radius: 8px; font-size: 13px;
+      margin-top: 12px; display: none;
+    }
+    @media (max-width: 420px) {
+      .dias-grid { grid-template-columns: repeat(3, 1fr); }
+      .form-body { padding: 20px; }
+      .header { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <span class="logo-icon">🏋️</span>
+    <h1>Solicitar Personal Trainer</h1>
+    <p>Preencha o formulário e entraremos em contato em breve</p>
+  </div>
+
+  <div class="form-body" id="formWrapper">
+    <form id="solicitacaoForm">
+      <div class="section-title">Seus Dados</div>
+      <div class="form-group">
+        <label for="nome">Nome completo *</label>
+        <input type="text" id="nome" name="Nome" placeholder="Ex: João da Silva" required />
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" name="Email" placeholder="seu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone / WhatsApp *</label>
+        <input type="tel" id="telefone" name="Telefone" placeholder="(61) 99999-9999" required />
+      </div>
+      <div class="form-group">
+        <label for="unidade">Unidade Bodytech *</label>
+        <div class="select-wrapper">
+          <select id="unidade" name="Unidade" required>
+            <option value="" disabled selected>Selecione sua unidade</option>
+            <option>Bodytech Asa Sul</option>
+            <option>Bodytech Asa Norte</option>
+            <option>Bodytech Lago Sul</option>
+            <option>Bodytech Lago Norte</option>
+            <option>Bodytech Jardim Botânico</option>
+            <option>Bodytech Sudoeste</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="section-title">Preferências de Treino</div>
+      <div class="form-group">
+        <label>Dias disponíveis * <span style="font-weight:400;color:#999;">(selecione um ou mais)</span></label>
+        <div class="dias-grid">
+          <div><input class="dia-item" type="checkbox" id="seg" value="Segunda-feira" /><label class="dia-label" for="seg">Seg</label></div>
+          <div><input class="dia-item" type="checkbox" id="ter" value="Terça-feira" /><label class="dia-label" for="ter">Ter</label></div>
+          <div><input class="dia-item" type="checkbox" id="qua" value="Quarta-feira" /><label class="dia-label" for="qua">Qua</label></div>
+          <div><input class="dia-item" type="checkbox" id="qui" value="Quinta-feira" /><label class="dia-label" for="qui">Qui</label></div>
+          <div><input class="dia-item" type="checkbox" id="sex" value="Sexta-feira" /><label class="dia-label" for="sex">Sex</label></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="horario">Horário preferido *</label>
+        <div class="select-wrapper">
+          <select id="horario" name="Horario" required>
+            <option value="" disabled selected>Selecione um horário</option>
+            <option>05:00</option><option>06:00</option><option>07:00</option>
+            <option>08:00</option><option>09:00</option><option>10:00</option>
+            <option>11:00</option><option>12:00</option><option>13:00</option>
+            <option>14:00</option><option>15:00</option><option>16:00</option>
+            <option>17:00</option><option>18:00</option><option>19:00</option>
+            <option>20:00</option><option>21:00</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="objetivo">Objetivo do treino *</label>
+        <div class="select-wrapper">
+          <select id="objetivo" name="Objetivo" required>
+            <option value="" disabled selected>Selecione seu objetivo</option>
+            <option>Hipertrofia</option>
+            <option>Emagrecimento</option>
+            <option>Alto Rendimento</option>
+            <option>Reabilitação</option>
+            <option>Estética</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="preferencia">Preferência de personal *</label>
+        <div class="select-wrapper">
+          <select id="preferencia" name="Preferencia" required>
+            <option value="" disabled selected>Selecione sua preferência</option>
+            <option>Homem</option>
+            <option>Mulher</option>
+            <option>Qualquer gênero</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+      <button type="submit" class="submit-btn" id="submitBtn">Enviar Solicitação →</button>
+    </form>
+  </div>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">✅</div>
+    <h2>Solicitação enviada!</h2>
+    <p>Recebemos seu pedido, <strong id="nomeConfirm"></strong>.<br/>Em breve entraremos em contato pelo número informado.</p>
+    <p style="margin-top:16px;font-size:13px;color:#aaa;">Equipe Bodytech</p>
+  </div>
+</div>
+
+<script>
+  document.getElementById('solicitacaoForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const diasSemana = Array.from(document.querySelectorAll('.dia-item:checked')).map(cb => cb.value);
+    if (diasSemana.length === 0) {
+      showError('Por favor, selecione pelo menos um dia disponível.');
+      return;
+    }
+    hideError();
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    const nome = document.getElementById('nome').value.trim();
+
+    // Usa FormData (multipart) — funciona sem restrição de domínio no Formspree
+    const fd = new FormData();
+    fd.append('Nome', nome);
+    fd.append('Email', document.getElementById('email').value.trim());
+    fd.append('Telefone', document.getElementById('telefone').value.trim());
+    fd.append('Unidade', document.getElementById('unidade').value);
+    fd.append('Dias Disponiveis', diasSemana.join(', '));
+    fd.append('Horario Preferido', document.getElementById('horario').value);
+    fd.append('Objetivo do Treino', document.getElementById('objetivo').value);
+    fd.append('Preferencia de Personal', document.getElementById('preferencia').value);
+
+    try {
+      const res = await fetch('https://formspree.io/f/xnjrzgza', {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        document.getElementById('formWrapper').style.display = 'none';
+        document.getElementById('nomeConfirm').textContent = nome.split(' ')[0];
+        document.getElementById('successScreen').style.display = 'block';
+      } else {
+        const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Erro ao enviar. Tente novamente.';
+        showError(msg);
+        btn.disabled = false;
+        btn.textContent = 'Enviar Solicitação →';
+      }
+    } catch(err) {
+      showError('Erro de conexão. Verifique sua internet e tente novamente.');
+      btn.disabled = false;
+      btn.textContent = 'Enviar Solicitação →';
+    }
+  });
+
+  function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+  function hideError() { document.getElementById('errorMsg').style.display = 'none'; }
+</script>
+</body>
+</html>

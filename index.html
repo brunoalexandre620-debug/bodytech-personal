@@ -4,205 +4,441 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Solicitar Personal Trainer – Bodytech</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0d0d1a;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      background: #f2f2f2;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* HEADER */
+    .site-header {
+      width: 100%;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+      height: 64px;
+    }
+    .site-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-box {
+      background: #4DC9A0;
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      letter-spacing: -1px;
     }
-    .container {
-      background: #ffffff;
-      border-radius: 16px;
-      max-width: 580px;
+    .logo-text {
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* HERO BANNER */
+    .hero {
       width: 100%;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      padding: 32px 30px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 40px 20px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
-    .header::after {
+    .hero::before {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #e63946, #ff6b35, #e63946);
+      top: -40px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(77,201,160,0.15) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .header h1 { color: #ffffff; font-size: 22px; font-weight: 700; margin-top: 10px; }
-    .header p { color: #a0a8c0; font-size: 14px; margin-top: 6px; }
-    .logo-icon { font-size: 36px; display: block; }
-    .form-body { padding: 30px; }
-    .section-title {
-      font-size: 13px; font-weight: 700; color: #e63946;
-      text-transform: uppercase; letter-spacing: 1px;
-      margin: 24px 0 14px 0; padding-bottom: 6px;
+    .hero-tag {
+      display: inline-block;
+      background: #4DC9A0;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      color: #ffffff;
+      font-size: 26px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+    .hero h1 span { color: #4DC9A0; }
+    .hero p {
+      color: #aaaaaa;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
+    /* FORM CARD */
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 600px;
+      margin: 32px auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      overflow: hidden;
+    }
+
+    .card-section {
+      padding: 28px 32px;
       border-bottom: 1px solid #f0f0f0;
     }
-    .section-title:first-child { margin-top: 0; }
+    .card-section:last-of-type { border-bottom: none; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4DC9A0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+
     .form-group { margin-bottom: 16px; }
-    label { display: block; font-size: 13px; font-weight: 600; color: #444; margin-bottom: 6px; }
-    input[type="text"], input[type="email"], input[type="tel"], select {
-      width: 100%; padding: 11px 14px;
-      border: 1.5px solid #e0e0e0; border-radius: 8px;
-      font-size: 14px; color: #333; background: #fafafa;
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 7px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 3px;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      background: #fff;
       transition: border-color 0.2s, box-shadow 0.2s;
       appearance: none; -webkit-appearance: none;
     }
     input:focus, select:focus {
-      outline: none; border-color: #e63946;
-      box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1); background: #fff;
+      outline: none;
+      border-color: #4DC9A0;
+      box-shadow: 0 0 0 3px rgba(77,201,160,0.12);
     }
+    input::placeholder { color: #bbb; font-size: 13px; }
+
     .select-wrapper { position: relative; }
     .select-wrapper::after {
-      content: '▼'; font-size: 10px; color: #999;
-      position: absolute; right: 14px; top: 50%;
-      transform: translateY(-50%); pointer-events: none;
+      content: '▼';
+      font-size: 9px;
+      color: #999;
+      position: absolute;
+      right: 14px; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
     }
-    .dias-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+
+    /* DIAS */
+    .dias-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
     .dia-item { display: none; }
     .dia-label {
-      display: flex; align-items: center; justify-content: center;
-      padding: 10px 6px; border: 1.5px solid #e0e0e0; border-radius: 8px;
-      cursor: pointer; font-size: 12px; font-weight: 600; color: #666;
-      background: #fafafa; transition: all 0.2s; text-align: center; user-select: none;
-    }
-    .dia-item:checked + .dia-label { background: #e63946; border-color: #e63946; color: #fff; }
-    .dia-label:hover { border-color: #e63946; color: #e63946; }
-    .submit-btn {
-      width: 100%; padding: 15px;
-      background: linear-gradient(135deg, #e63946, #c1121f);
-      color: white; border: none; border-radius: 10px;
-      font-size: 16px; font-weight: 700; cursor: pointer;
-      margin-top: 26px; transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 6px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      color: #777;
+      background: #fafafa;
+      transition: all 0.18s;
+      text-align: center;
+      user-select: none;
+      text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(230,57,70,0.4); }
+    .dia-item:checked + .dia-label {
+      background: #4DC9A0;
+      border-color: #4DC9A0;
+      color: #fff;
+    }
+    .dia-label:hover { border-color: #4DC9A0; color: #4DC9A0; }
+
+    /* BOTÃO */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: #4DC9A0;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .submit-btn:hover { background: #3ab88d; transform: translateY(-1px); }
     .submit-btn:active { transform: translateY(0); }
     .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .success-screen { display: none; padding: 50px 30px; text-align: center; }
-    .success-icon { font-size: 64px; margin-bottom: 16px; }
-    .success-screen h2 { font-size: 22px; color: #1a1a2e; margin-bottom: 10px; }
-    .success-screen p { font-size: 15px; color: #666; line-height: 1.6; }
-    .error-msg {
-      background: #fff0f0; border: 1px solid #ffcccc; color: #c1121f;
-      padding: 10px 14px; border-radius: 8px; font-size: 13px;
-      margin-top: 12px; display: none;
+
+    .btn-wrapper {
+      padding: 24px 32px 32px;
     }
-    @media (max-width: 420px) {
+
+    /* ERRO */
+    .error-msg {
+      background: #fff5f5;
+      border: 1px solid #ffd0d0;
+      color: #c0392b;
+      padding: 10px 14px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    /* SUCESSO */
+    .success-screen {
+      display: none;
+      padding: 60px 32px;
+      text-align: center;
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: #4DC9A0;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+    }
+    .success-screen h2 {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    .success-screen p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.7;
+    }
+    .success-screen strong { color: #1a1a1a; }
+
+    /* FOOTER */
+    .site-footer {
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: #aaa;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
       .dias-grid { grid-template-columns: repeat(3, 1fr); }
-      .form-body { padding: 20px; }
-      .header { padding: 24px 20px; }
+      .card-section { padding: 22px 20px; }
+      .btn-wrapper { padding: 16px 20px 24px; }
+      .hero h1 { font-size: 20px; }
     }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <span class="logo-icon">🏋️</span>
-    <h1>Solicitar Personal Trainer</h1>
-    <p>Preencha o formulário e entraremos em contato em breve</p>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo">
+      <div class="logo-box">bt</div>
+      <span class="logo-text">Bodytech</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-tag">Personal Trainer</span>
+    <h1>Encontre seu <span>personal</span> ideal</h1>
+    <p>Preencha o formulário e nossa equipe entrará em contato em breve</p>
   </div>
 
-  <div class="form-body" id="formWrapper">
-    <form id="solicitacaoForm">
-      <div class="section-title">Seus Dados</div>
-      <div class="form-group">
-        <label for="nome">Nome completo *</label>
-        <input type="text" id="nome" name="Nome" placeholder="Ex: João da Silva" required />
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail *</label>
-        <input type="email" id="email" name="Email" placeholder="seu@email.com" required />
-      </div>
-      <div class="form-group">
-        <label for="telefone">Telefone / WhatsApp *</label>
-        <input type="tel" id="telefone" name="Telefone" placeholder="(61) 99999-9999" required />
-      </div>
-      <div class="form-group">
-        <label for="unidade">Unidade Bodytech *</label>
-        <div class="select-wrapper">
-          <select id="unidade" name="Unidade" required>
-            <option value="" disabled selected>Selecione sua unidade</option>
-            <option>Bodytech Asa Sul</option>
-            <option>Bodytech Asa Norte</option>
-            <option>Bodytech Lago Sul</option>
-            <option>Bodytech Lago Norte</option>
-            <option>Bodytech Jardim Botânico</option>
-            <option>Bodytech Sudoeste</option>
-          </select>
-        </div>
-      </div>
+  <!-- CARD -->
+  <div class="card">
+    <div id="formWrapper">
 
-      <div class="section-title">Preferências de Treino</div>
-      <div class="form-group">
-        <label>Dias disponíveis * <span style="font-weight:400;color:#999;">(selecione um ou mais)</span></label>
-        <div class="dias-grid">
-          <div><input class="dia-item" type="checkbox" id="seg" value="Segunda-feira" /><label class="dia-label" for="seg">Seg</label></div>
-          <div><input class="dia-item" type="checkbox" id="ter" value="Terça-feira" /><label class="dia-label" for="ter">Ter</label></div>
-          <div><input class="dia-item" type="checkbox" id="qua" value="Quarta-feira" /><label class="dia-label" for="qua">Qua</label></div>
-          <div><input class="dia-item" type="checkbox" id="qui" value="Quinta-feira" /><label class="dia-label" for="qui">Qui</label></div>
-          <div><input class="dia-item" type="checkbox" id="sex" value="Sexta-feira" /><label class="dia-label" for="sex">Sex</label></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="horario">Horário preferido *</label>
-        <div class="select-wrapper">
-          <select id="horario" name="Horario" required>
-            <option value="" disabled selected>Selecione um horário</option>
-            <option>05:00</option><option>06:00</option><option>07:00</option>
-            <option>08:00</option><option>09:00</option><option>10:00</option>
-            <option>11:00</option><option>12:00</option><option>13:00</option>
-            <option>14:00</option><option>15:00</option><option>16:00</option>
-            <option>17:00</option><option>18:00</option><option>19:00</option>
-            <option>20:00</option><option>21:00</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="objetivo">Objetivo do treino *</label>
-        <div class="select-wrapper">
-          <select id="objetivo" name="Objetivo" required>
-            <option value="" disabled selected>Selecione seu objetivo</option>
-            <option>Hipertrofia</option>
-            <option>Emagrecimento</option>
-            <option>Alto Rendimento</option>
-            <option>Reabilitação</option>
-            <option>Estética</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="preferencia">Preferência de personal *</label>
-        <div class="select-wrapper">
-          <select id="preferencia" name="Preferencia" required>
-            <option value="" disabled selected>Selecione sua preferência</option>
-            <option>Homem</option>
-            <option>Mulher</option>
-            <option>Qualquer gênero</option>
-          </select>
-        </div>
-      </div>
+      <form id="solicitacaoForm">
 
-      <div class="error-msg" id="errorMsg"></div>
-      <button type="submit" class="submit-btn" id="submitBtn">Enviar Solicitação →</button>
-    </form>
+        <!-- SEÇÃO 1 -->
+        <div class="card-section">
+          <div class="section-title">Seus Dados</div>
+
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="Nome" placeholder="Ex: João da Silva" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="Email" placeholder="seu@email.com" required />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label for="telefone">WhatsApp</label>
+              <input type="tel" id="telefone" name="Telefone" placeholder="(61) 99999-9999" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 2 -->
+        <div class="card-section">
+          <div class="section-title">Unidade</div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <label for="unidade">Selecione sua unidade</label>
+            <div class="select-wrapper">
+              <select id="unidade" name="Unidade" required>
+                <option value="" disabled selected>Escolha uma unidade</option>
+                <option>Bodytech Asa Sul</option>
+                <option>Bodytech Asa Norte</option>
+                <option>Bodytech Lago Sul</option>
+                <option>Bodytech Lago Norte</option>
+                <option>Bodytech Jardim Botânico</option>
+                <option>Bodytech Sudoeste</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEÇÃO 3 -->
+        <div class="card-section">
+          <div class="section-title">Preferências de Treino</div>
+
+          <div class="form-group">
+            <label>Dias disponíveis <span style="text-transform:none;font-weight:400;color:#bbb;letter-spacing:0">(selecione um ou mais)</span></label>
+            <div class="dias-grid">
+              <div><input class="dia-item" type="checkbox" id="seg" value="Segunda-feira" /><label class="dia-label" for="seg">Seg</label></div>
+              <div><input class="dia-item" type="checkbox" id="ter" value="Terça-feira" /><label class="dia-label" for="ter">Ter</label></div>
+              <div><input class="dia-item" type="checkbox" id="qua" value="Quarta-feira" /><label class="dia-label" for="qua">Qua</label></div>
+              <div><input class="dia-item" type="checkbox" id="qui" value="Quinta-feira" /><label class="dia-label" for="qui">Qui</label></div>
+              <div><input class="dia-item" type="checkbox" id="sex" value="Sexta-feira" /><label class="dia-label" for="sex">Sex</label></div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <label for="horario">Horário preferido</label>
+              <div class="select-wrapper">
+                <select id="horario" name="Horario" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>05:00</option><option>06:00</option><option>07:00</option>
+                  <option>08:00</option><option>09:00</option><option>10:00</option>
+                  <option>11:00</option><option>12:00</option><option>13:00</option>
+                  <option>14:00</option><option>15:00</option><option>16:00</option>
+                  <option>17:00</option><option>18:00</option><option>19:00</option>
+                  <option>20:00</option><option>21:00</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label for="preferencia">Preferência de gênero</label>
+              <div class="select-wrapper">
+                <select id="preferencia" name="Preferencia" required>
+                  <option value="" disabled selected>Selecione</option>
+                  <option>Homem</option>
+                  <option>Mulher</option>
+                  <option>Qualquer gênero</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:16px;margin-bottom:0">
+            <label for="objetivo">Objetivo do treino</label>
+            <div class="select-wrapper">
+              <select id="objetivo" name="Objetivo" required>
+                <option value="" disabled selected>Selecione seu objetivo</option>
+                <option>Hipertrofia</option>
+                <option>Emagrecimento</option>
+                <option>Alto Rendimento</option>
+                <option>Reabilitação</option>
+                <option>Estética</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÃO -->
+        <div class="btn-wrapper">
+          <div class="error-msg" id="errorMsg"></div>
+          <button type="submit" class="submit-btn" id="submitBtn">Enviar Solicitação</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- SUCESSO -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>Solicitação enviada!</h2>
+      <p>Recebemos seu pedido, <strong id="nomeConfirm"></strong>.<br/>Em breve entraremos em contato pelo número informado.</p>
+      <p style="margin-top:20px;font-size:11px;color:#bbb;letter-spacing:1px;text-transform:uppercase;font-weight:700;">Equipe Bodytech</p>
+    </div>
   </div>
 
-  <div class="success-screen" id="successScreen">
-    <div class="success-icon">✅</div>
-    <h2>Solicitação enviada!</h2>
-    <p>Recebemos seu pedido, <strong id="nomeConfirm"></strong>.<br/>Em breve entraremos em contato pelo número informado.</p>
-    <p style="margin-top:16px;font-size:13px;color:#aaa;">Equipe Bodytech</p>
-  </div>
-</div>
+  <!-- FOOTER -->
+  <footer class="site-footer">© Bodytech — Todos os direitos reservados</footer>
 
 <script>
   document.getElementById('solicitacaoForm').addEventListener('submit', async (e) => {
@@ -221,7 +457,6 @@
 
     const nome = document.getElementById('nome').value.trim();
 
-    // Usa FormData (multipart) — funciona sem restrição de domínio no Formspree
     const fd = new FormData();
     fd.append('Nome', nome);
     fd.append('Email', document.getElementById('email').value.trim());
@@ -249,12 +484,12 @@
         const msg = data.errors ? data.errors.map(e => e.message).join(', ') : 'Erro ao enviar. Tente novamente.';
         showError(msg);
         btn.disabled = false;
-        btn.textContent = 'Enviar Solicitação →';
+        btn.textContent = 'Enviar Solicitação';
       }
     } catch(err) {
       showError('Erro de conexão. Verifique sua internet e tente novamente.');
       btn.disabled = false;
-      btn.textContent = 'Enviar Solicitação →';
+      btn.textContent = 'Enviar Solicitação';
     }
   });
 

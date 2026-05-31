@@ -289,6 +289,37 @@
     }
 
 
+
+    .lesoes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .lesao-item { display: none; }
+    .lesao-label {
+      display: flex;
+      align-items: center;
+      padding: 11px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      color: #777;
+      background: #fafafa;
+      transition: all 0.18s;
+      user-select: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      gap: 8px;
+    }
+    .lesao-item:checked + .lesao-label {
+      background: #4DC9A0;
+      border-color: #4DC9A0;
+      color: #fff;
+    }
+    .lesao-label:hover { border-color: #4DC9A0; color: #4DC9A0; }
+    .lesao-label .lesao-icon { font-size: 15px; }
     textarea {
       width: 100%;
       padding: 12px 14px;
@@ -428,6 +459,24 @@
           </div>
         </div>
 
+        <!-- SEÇÃO 4 - LESÕES -->
+        <div class="card-section">
+          <div class="section-title">Histórico de Lesões</div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Possui alguma lesão? <span style="text-transform:none;font-weight:400;color:#bbb;letter-spacing:0">(opcional — selecione uma ou mais)</span></label>
+            <div class="lesoes-grid">
+              <div><input class="lesao-item" type="checkbox" id="ligamento" value="Lesão de Ligamento" /><label class="lesao-label" for="ligamento"><span class="lesao-icon">🦵</span> Lesão de Ligamento</label></div>
+              <div><input class="lesao-item" type="checkbox" id="hernia" value="Hérnia de Disco" /><label class="lesao-label" for="hernia"><span class="lesao-icon">🦴</span> Hérnia de Disco</label></div>
+              <div><input class="lesao-item" type="checkbox" id="menisco" value="Lesão de Menisco" /><label class="lesao-label" for="menisco"><span class="lesao-icon">🦵</span> Lesão de Menisco</label></div>
+              <div><input class="lesao-item" type="checkbox" id="tendinite" value="Tendinite" /><label class="lesao-label" for="tendinite"><span class="lesao-icon">💪</span> Tendinite</label></div>
+              <div><input class="lesao-item" type="checkbox" id="lombar" value="Dor Lombar / Ciática" /><label class="lesao-label" for="lombar"><span class="lesao-icon">🔙</span> Dor Lombar / Ciática</label></div>
+              <div><input class="lesao-item" type="checkbox" id="ombro" value="Lesão no Ombro / Manguito" /><label class="lesao-label" for="ombro"><span class="lesao-icon">🤷</span> Lesão no Ombro / Manguito</label></div>
+              <div><input class="lesao-item" type="checkbox" id="fratura" value="Fratura / Cirurgia Prévia" /><label class="lesao-label" for="fratura"><span class="lesao-icon">🩹</span> Fratura / Cirurgia Prévia</label></div>
+              <div><input class="lesao-item" type="checkbox" id="sem_lesao" value="Sem Lesões" /><label class="lesao-label" for="sem_lesao"><span class="lesao-icon">✅</span> Sem Lesões</label></div>
+            </div>
+          </div>
+        </div>
+
         <!-- SEÇÃO 4 -->
         <div class="card-section">
           <div class="section-title">Observações</div>
@@ -483,6 +532,9 @@
     fd.append('Dias Disponiveis', diasSemana.join(', '));
     fd.append('Horario Preferido', document.getElementById('horario').value);
     fd.append('Objetivo do Treino', document.getElementById('objetivo').value);
+
+    const lesoesSelecionadas = Array.from(document.querySelectorAll('.lesao-item:checked')).map(cb => cb.value);
+    fd.append('Historico de Lesoes', lesoesSelecionadas.length > 0 ? lesoesSelecionadas.join(', ') : 'Nenhuma informada');
 
     fd.append('Observacoes', document.getElementById('observacoes').value.trim());
 
